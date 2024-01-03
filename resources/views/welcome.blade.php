@@ -9,12 +9,16 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
 
-    <body>
-        <div id="content" class="mx-auto" style="max-width:500px;">
+    <body clas="antialiased">
+        <div class='flex'>
+            <div class="w-2/4">
+                @livewire('users-list')
+            </div>
+            <div class="w-2/4">
             <!-- THIS IS FROM TODO-LIST-BLADE.PHP -->
             @livewire('register-form')
+            </div>
         </div>
-
     </body>
 
 </html>
