@@ -6,7 +6,6 @@ use Livewire\Component;
 use App\Models\Register;
 use Livewire\WithPagination;
 use Livewire\Attributes\On;
-use Livewire\Attributes\Computed;
 
 class UsersList extends Component
 {
@@ -14,10 +13,15 @@ class UsersList extends Component
  
     // THIS IS FOR THE SEARCH
     public $search;
-    public $activeUsers;
+    
+    // THIS BELONGS TO THE SEARCH TOO
+    public function update(){
 
-    public function placeholder(){
-        return view('placeholder');
+    }
+
+    // PASS DATA TO COMPONENTS AND MOUNT, THERE IS A DEFAULT VALUE IN SEARCH IF WE WILL USE THIS
+    public function mount($search){
+        $this->search = $search;
     }
 
     #[On('user-created')]
@@ -25,25 +29,8 @@ class UsersList extends Component
         
     }
 
-    // PASS DATA TO COMPONENTS AND MOUNT, THERE IS A DEFAULT VALUE IN SEARCH IF WE WILL USE THIS
-    public function mount($search){
-        $this->search = $search;
-        $this->activeUsers = Register::latest()->get();
-    }
-
-    // THIS IS FOR THE COMPUTED PROPERTIES
-    #[Computed()]
-    public function registers(){
-        return Register::latest()
-        ->where('name', 'like', "%{$this->search}%")
-        ->paginate(3);
-    }
-
-    // THIS BELONGS TO THE SEARCH TOO
-    public function update(){
-        // $registers = Register::latest()
-        // ->where('name', 'like', "%{$this->search}%")
-        // ->paginate(3);
+    public function placeholder(){
+        return view('placeholder');
     }
 
     public function render()
@@ -54,13 +41,13 @@ class UsersList extends Component
     // }
     {
         // the users will be use in frontend
-        // sleep(1);
+        sleep(1);
         // $registers = Register::latest()->paginate(3);
         return view('livewire.users-list', [
-            // 'registers'=>Register::latest()
-            // ->where('name', 'like', "%{$this->search}%")
-            // ->paginate(3),
-            // 'count' => Register::count(),
+            'registers'=>Register::latest()
+            ->where('name', 'like', "%{$this->search}%")
+            ->paginate(3),
+            'count' => Register::count(),
         ]);
     }
 }

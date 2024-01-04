@@ -34,7 +34,7 @@
 
             <!-- THESE ARE THE DATA -->
             <tbody>
-                @foreach($this->$registers as $register)
+                @foreach($registers as $register)
                 <tr>
                     <td class="border-b px-6 py-4">{{$register->name}}</td>
                     <td class="border-b px-6 py-4">{{$register->email}}</td>
@@ -43,7 +43,7 @@
                 @endforeach
             </tbody>
         </table>
-        </div>
+    </div>
    
 
     <!-- pagination -->
