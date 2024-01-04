@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Register;
 use Livewire\WithPagination;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Computed;
+use League\Flysystem\MountManager;
 
 class UsersList extends Component
 {
@@ -13,15 +15,10 @@ class UsersList extends Component
  
     // THIS IS FOR THE SEARCH
     public $search;
-    
-    // THIS BELONGS TO THE SEARCH TOO
-    public function update(){
+    public $activeUsers;
 
-    }
-
-    // PASS DATA TO COMPONENTS AND MOUNT, THERE IS A DEFAULT VALUE IN SEARCH IF WE WILL USE THIS
-    public function mount($search){
-        $this->search = $search;
+    public function placeholder(){
+        return view('placeholder');
     }
 
     #[On('user-created')]
@@ -29,25 +26,37 @@ class UsersList extends Component
         
     }
 
-    public function placeholder(){
-        return view('placeholder');
+    // PASS DATA TO COMPONENTS AND MOUNT, THERE IS A DEFAULT VALUE IN SEARCH IF WE WILL USE THIS
+    public function mount($search){
+        $this->search = $search;
+        $this->activeUsers = Register::latest()->get();
+    }
+
+    // THIS IS FOR THE COMPUTED PROPERTIES
+    #[Computed()]
+    public function registers(){
+        return Register::latest()
+        ->where('name', 'like', "%{$this->search}%")
+        ->paginate(3);
+    }
+
+    // THIS BELONGS TO THE SEARCH TOO
+    public function update(){
+        // $registers = Register::latest()
+        // ->where('name', 'like', "%{$this->search}%")
+        // ->paginate(3);
     }
 
     public function render()
-    // {
-    //     return view('livewire.users-list',[
-    //         'registers' => Register::latest()->paginate(3)
-    //     ]);
-    // }
     {
         // the users will be use in frontend
-        sleep(1);
+        // sleep(1);
         // $registers = Register::latest()->paginate(3);
         return view('livewire.users-list', [
-            'registers'=>Register::latest()
-            ->where('name', 'like', "%{$this->search}%")
-            ->paginate(3),
-            'count' => Register::count(),
+            // 'registers'=>Register::latest()
+            // ->where('name', 'like', "%{$this->search}%")
+            // ->paginate(3),
+            // 'count' => Register::count(),
         ]);
     }
 }
