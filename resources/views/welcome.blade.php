@@ -12,8 +12,9 @@
     <body clas="antialiased">
         <div class='flex'>
             <div class="w-2/4">
-                @livewire('users-list', ['lazy'=> true])
-                <!-- <livewire:users-list lazy /> -->
+                <!-- THE DEFAULT IN SEARCH BAR NOW WILL BE PROF, THIS IS FROM THE MOUNT -->
+                <!-- @livewire('users-list', ['lazy'=> true], ['search'=>'prof']) -->
+                <!-- <livewire:users-list lazy  search="prof"/> -->
             </div>
             <div class="w-2/4">
                 <!-- THIS IS FROM TODO-LIST-BLADE.PHP -->

@@ -1,6 +1,26 @@
 <!-- wire poll so that the table will sync even without entering the create button -->
 <div wire:poll.visible.5s class="mt-24 p-5 mx-auto w-full ml-10 rounded-3xl shadow  border-t-2">
-    <h1 class="font-semibold text-3xl">Users List</h1>
+    <div class="flex justify-between">
+        <div>
+            
+            <h1 class="font-semibold text-3xl">Users List</h1>  
+        </div>
+        <div class="flex">
+            <div>
+                <button wire:click="update" type="button" class="block mt-3 px-4  py-2 bg-teal-500 text-white font-semibold rounded hover:bg-teal-600 mr-3" >
+                    Search
+                </button>
+            </div>
+            <div>
+                <!-- .live means to search while user types -->
+                <input wire:model.live.throttle.200ms='search' type="text" placeholder="Search..."
+                    class="ring-1 ring-inset ring-gray-300 bg-gray-100 text-gray-900 text-sm rounded block w-full mt-3 px-4  py-2.5">
+            </div>
+            
+        </div>
+      
+    </div>
+
     <div class="mt-3">
         <!-- render all users -->
         <table class="w-full whitespace-nowrap">
@@ -23,7 +43,6 @@
                 @endforeach
             </tbody>
         </table>
-            <!-- <h3>{{$register->name}}</h3> -->
         </div>
    
 
