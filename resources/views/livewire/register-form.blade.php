@@ -50,18 +50,20 @@
             <span class="text-green-500">Uploading ...</span>
         </div>
 
+        
+        <!-- THIS IS IF THERE IS LOADING WHEN THE USER CREATE -->
         <!-- THIS IS FOR THE LOADING -->
         <div wire:loading.delay.longest> 
             <span class="text-green-500">Sending ...</span>
         </div>
 
-        <button wire.click.prevent="ReloadList"class="block mt-3 px-4  py-2 bg-teal-500 text-white font-semibold rounded hover:bg-teal-600" >
+        <button @click="dispatch('user-created')" type="button" class="block mt-3 px-4  py-2 bg-teal-500 text-white font-semibold rounded hover:bg-teal-600" >
             Reload List
         </button>
 
         <button 
             wire:loading.attr="disabled" 
-            wire:loading.class.remove="bg-blue-500"
+            wire:loading.class="bg-blue-500"
             type="submit"
         class="block mt-3 px-4  py-2 bg-teal-500 text-white font-semibold rounded hover:bg-teal-600">Create</button>
     </form>

@@ -24,7 +24,7 @@ class UsersList extends Component
     // }
     {
         // the users will be use in frontend
-        $registers = Register::paginate(5);
+        $registers = Register::latest()->paginate(3);
         return view('livewire.users-list', [
             'registers' =>$registers
         ]);
