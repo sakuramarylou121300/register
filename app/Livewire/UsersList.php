@@ -16,6 +16,10 @@ class UsersList extends Component
         
     }
 
+    public function placeholder(){
+        return view('placeholder');
+    }
+
     public function render()
     // {
     //     return view('livewire.users-list',[
@@ -24,9 +28,11 @@ class UsersList extends Component
     // }
     {
         // the users will be use in frontend
+        sleep(3);
         $registers = Register::latest()->paginate(3);
         return view('livewire.users-list', [
-            'registers' =>$registers
+            'registers' =>$registers,
+            'count' => Register::count(),
         ]);
     }
 }

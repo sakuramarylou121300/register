@@ -12,11 +12,12 @@
     <body clas="antialiased">
         <div class='flex'>
             <div class="w-2/4">
-                @livewire('users-list')
+                @livewire('users-list', ['lazy'=> true])
+                <!-- <livewire:users-list lazy /> -->
             </div>
             <div class="w-2/4">
-            <!-- THIS IS FROM TODO-LIST-BLADE.PHP -->
-            @livewire('register-form')
+                <!-- THIS IS FROM TODO-LIST-BLADE.PHP -->
+                @livewire('register-form')
             </div>
         </div>
     </body>
