@@ -47,6 +47,6 @@
    
 
     <!-- pagination -->
-    {{$registers->links()}}
+    {{$this->registers->links()}}
 
 </div>

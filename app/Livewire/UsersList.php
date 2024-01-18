@@ -40,12 +40,12 @@ class UsersList extends Component
         ->paginate(3);
     }
 
-    // THIS BELONGS TO THE SEARCH TOO
-    public function update(){
-        // $registers = Register::latest()
-        // ->where('name', 'like', "%{$this->search}%")
-        // ->paginate(3);
-    }
+    // // THIS BELONGS TO THE SEARCH TOO
+    // public function update(){
+    //     $this->registers = Register::latest()
+    //     ->where('name', 'like', "%{$this->search}%")
+    //     ->paginate(3);
+    // }
 
     public function render()
     {
@@ -57,6 +57,7 @@ class UsersList extends Component
             // ->where('name', 'like', "%{$this->search}%")
             // ->paginate(3),
             // 'count' => Register::count(),
-        ]);
+        ]
+    );
     }
 }
