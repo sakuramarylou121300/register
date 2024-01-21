@@ -30,34 +30,38 @@ class UsersList extends Component
     public function mount($search){
         $this->search = $search;
         $this->activeUsers = Register::latest()->get();
+
+        // to clean cache
+        unset($this->registers);   
     }
 
     // THIS IS FOR THE COMPUTED PROPERTIES
-    #[Computed()]
+    // persist is for cache
+    #[Computed(persist: true, seconds: 3600)]
     public function registers(){
         return Register::latest()
         ->where('name', 'like', "%{$this->search}%")
         ->paginate(3);
     }
 
-    // // THIS BELONGS TO THE SEARCH TOO
-    // public function update(){
-    //     $this->registers = Register::latest()
-    //     ->where('name', 'like', "%{$this->search}%")
-    //     ->paginate(3);
-    // }
-
-    public function render()
-    {
-        // the users will be use in frontend
-        // sleep(1);
-        // $registers = Register::latest()->paginate(3);
-        return view('livewire.users-list', [
-            // 'registers'=>Register::latest()
-            // ->where('name', 'like', "%{$this->search}%")
-            // ->paginate(3),
-            // 'count' => Register::count(),
-        ]
-    );
+    // THIS BELONGS TO THE SEARCH TOO
+    public function update(){
+        $this->registers = Register::latest()
+        ->where('name', 'like', "%{$this->search}%")
+        ->paginate(3);
     }
+
+    // public function render()
+    // {
+    //     // the users will be use in frontend
+    //     // sleep(1);
+    //     // $registers = Register::latest()->paginate(3);
+    //     return view('livewire.users-list', [
+    //         // 'registers'=>Register::latest()
+    //         // ->where('name', 'like', "%{$this->search}%")
+    //         // ->paginate(3),
+    //         // 'count' => Register::count(),
+    //     ]
+    // );
+    // }
 }
